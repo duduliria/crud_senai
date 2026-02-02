@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Usuários</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="toolbar">
+      <div>
+        <h1>👥 Cadastro de Usuários</h1>
+        <p class="small">CRUD (simulação no front). Depois conectaremos no Node + MySQL.</p>
+      </div>
+      <div class="row">
+        <input id="search" placeholder="Pesquisar por nome ou e-mail..." style="min-width:280px" />
+        <button class="btn-ghost" id="logoutBtn">Sair</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <h2>Formulário</h2>
+
+          <form id="userForm">
+            <input type="hidden" id="userId" />
+
+            <label for="name">Nome</label>
+            <input id="name" type="text" placeholder="Nome completo" required />
+
+            <label for="email">E-mail</label>
+            <input id="email" type="email" placeholder="email@dominio.com" required />
+
+            <label for="profile">Perfil</label>
+            <select id="profile">
+              <option value="ADMIN">ADMIN</option>
+              <option value="USER" selected>USER</option>
+            </select>
+
+            <label for="active">Status</label>
+            <select id="active">
+              <option value="1" selected>ATIVO</option>
+              <option value="0">INATIVO</option>
+            </select>
+
+            <label for="password">Senha</label>
+            <input id="password" type="password" placeholder="Senha (será criptografada no backend)" />
+
+            <div class="row" style="margin-top:14px;">
+              <button class="btn-primary" type="submit">Salvar</button>
+              <button class="btn-ghost" id="btnClear">Limpar</button>
+            </div>
+
+            <div id="alertUsers" class="alert" hidden></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <h2>Lista</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="usersTbody"></tbody>
+          </table>
+
+          <p class="small" style="margin-top:10px">
+            “Excluir” aqui significa <b>inativar</b> (soft delete).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initUsersPage } from "../assets/js/users.js";
+    // “controle de acesso” básico no front (o real será no backend com JWT)
+    if (!localStorage.getItem("token")) window.location.href = "./login.html";
+    initUsersPage();
+  </script>
+</body>
+</html>

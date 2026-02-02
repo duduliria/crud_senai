@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card" style="max-width:520px;margin:40px auto;">
+      <h1>🔐 Acesso ao Sistema</h1>
+      <p class="small">Para aula (simulação): senha correta é <b>123456</b>. Depois ligaremos no backend.</p>
+
+      <form id="loginForm">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="username" placeholder="ex: aluno@senai.com" required />
+
+        <label for="password">Senha</label>
+        <input id="password" type="password" autocomplete="current-password" placeholder="••••••" required />
+
+        <div class="row" style="margin-top:14px;">
+          <button class="btn-primary" type="submit">Entrar</button>
+          <button class="btn-ghost" type="button" id="forgotBtn">Esqueci a senha</button>
+        </div>
+
+        <div id="alert" class="alert" hidden></div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initLoginPage } from "../assets/js/auth.js";
+    initLoginPage();
+  </script>
+</body>
+</html>
