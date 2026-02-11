@@ -10,6 +10,10 @@ import { loginSchema } from "../validators/auth.validators.js";
 // Importa a função de serviço que executa a lógica de login com proteção de tentativas (lock)
 import { loginWithLock } from "../services/auth.service.js";
 
+// Alteração no passo 29.2 Import da função de middleware que exige autenticação 
+// (verificação de token JWT) para rotas protegidas
+import { requireAuth } from "../middlewares/auth.middleware.js";
+
 // Cria uma nova instância de router para definir as rotas de autenticação
 const router = Router();
 
@@ -58,6 +62,14 @@ router.post("/login", loginLimiter, async (req, res, next) => {
     // O 'next(err)' chama o middleware de erro global definido na aplicação
     next(err);
   }
+});
+
+// >>> ALTERADO: rota protegida para validar token (novo) Passo 29.3.1 da apostila
+router.get("/me", requireAuth, async (req, res) => {
+  return res.json({
+    ok: true,
+    auth: req.auth
+  });
 });
 
 // Exporta o router como padrão (default export) para ser usado em outros arquivos
